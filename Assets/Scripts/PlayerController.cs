@@ -27,8 +27,6 @@ public class PlayerController : MonoBehaviour
 	Vector3 movement;
 	RaycastHit slopeHit;
 	Vector3 slopeMovement;
-	public bool WallR;
-	public bool WallL;
 	bool slideblock = false;
 	bool canIgnore = false;
 	public bool canSlide = true;
@@ -61,11 +59,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 		grounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, ground);
-
-		if (rb.velocity.y <= 0)
-			gameObject.GetComponent<Wallrun>().wallGravity = 1;
-		else 
-			gameObject.GetComponent<Wallrun>().wallGravity = 4;
 
 		//save momentum after sliding down a slope
 		if (sliding && rb.velocity.magnitude > 13)
@@ -154,10 +147,6 @@ public class PlayerController : MonoBehaviour
 
 	void MovePlayer()
 	{
-		if (!grounded && WallR && moveX > 0)
-			moveX = 0;
-		if (!grounded && WallL && moveX < 0)
-			moveX = 0;
 		if (grounded && !OnSlope())
 		{
 			if (!sliding)

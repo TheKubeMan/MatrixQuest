@@ -11,7 +11,6 @@ public class Looking : MonoBehaviour
 	float mouseX, mouseY;
 	float x, y;
 	float xR, yR;
-	public Wallrun wallrun;
 	InputManager input;
 
     // Start is called before the first frame update
@@ -37,7 +36,7 @@ public class Looking : MonoBehaviour
 		xR = Mathf.Clamp(xR, -90, 90);
 		yR += mouseX;
 
-		transform.localRotation = Quaternion.Euler(xR, yR, wallrun.tilt);
+		transform.localRotation = Quaternion.Euler(xR, yR, 0);
 		orientation.transform.rotation = Quaternion.Euler(0, yR, 0);
     }
 }
