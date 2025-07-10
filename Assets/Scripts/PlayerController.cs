@@ -197,12 +197,7 @@ public class PlayerController : MonoBehaviour
 			rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
 		}
 	}
-	public void Boost(int level)
-	{
-		//adjust it to depend on charge level
-		//and make the speed somewhat normal
-		rb.AddForce(orientation.forward * 1000, ForceMode.Acceleration);
-	}
+	
 	void Pause()
 	{
 		pauseMenu.SetActive(true);
