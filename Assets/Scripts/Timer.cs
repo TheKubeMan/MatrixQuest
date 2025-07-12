@@ -18,26 +18,28 @@ public class Timer : MonoBehaviour
         if (finished == false)
         {
             miliseconds += 2;
-            if (miliseconds == 100){
+            if (miliseconds == 100)
+            {
                 seconds++;
                 miliseconds = 0;
             }
-            if (seconds == 60){
+            if (seconds == 60)
+            {
                 minutes++;
                 seconds = 0;
             }
-            if(miliseconds < 10 && seconds >= 10){
-            TimerString = minutes + ":" + seconds + ":0" + miliseconds;
-            }
-            if(miliseconds < 10 && seconds < 10){
+            if (miliseconds < 10 && seconds >= 10)
+                TimerString = minutes + ":" + seconds + ":0" + miliseconds;
+            
+            if (miliseconds < 10 && seconds < 10)
                 TimerString = minutes + ":0" + seconds + ":0" + miliseconds;
-            }
-            if(miliseconds >= 10 && seconds < 10){
+
+            if (miliseconds >= 10 && seconds < 10)
                 TimerString = minutes + ":0" + seconds + ":" + miliseconds;
-            }
-            if(miliseconds >= 10 && seconds >= 10){
+            
+            if (miliseconds >= 10 && seconds >= 10)
                 TimerString = minutes + ":" + seconds + ":" + miliseconds;
-            }
+            
         }
         TimeText.GetComponent<TextMeshProUGUI>().text = TimerString;
     }
