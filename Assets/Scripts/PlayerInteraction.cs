@@ -22,9 +22,9 @@ public class PlayerInteraction : MonoBehaviour
     // Physics related stuff must be in FixedUpdate
     void FixedUpdate()
     {
-        if (Physics.Raycast(orientation.position, orientation.forward, out ray, interactionDistance, interactable))
+        if (Physics.Raycast(orientation.position, Camera.main.transform.forward, out ray, interactionDistance, interactable))
         {
-            //Debug.Log("Object with type " + ray.transform.gameObject.GetComponent<Item>().type + " in sight");
+            Debug.Log("Object with type " + ray.transform.gameObject.GetComponent<Item>().type + " in sight");
             //display a prompt for interaction based on the type
             //for example, if it's a number, then it's a pickup icon and text
             //or, if it's a button, then it's "press the button" and so on
@@ -32,5 +32,7 @@ public class PlayerInteraction : MonoBehaviour
             if (input.Player.Interact.WasPressedThisFrame() && !paused)
                 ray.transform.gameObject.GetComponent<Item>().Interaction();
         }
+        else
+            Debug.Log("");  
     }
 }
