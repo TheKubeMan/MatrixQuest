@@ -29,8 +29,9 @@ public class PlayerInteraction : MonoBehaviour
             //for example, if it's a number, then it's a pickup icon and text
             //or, if it's a button, then it's "press the button" and so on
 
+            //maybe this will be changed to an event, like movement is in PlayerController
             if (input.Player.Interact.WasPressedThisFrame() && !paused)
-                ray.transform.gameObject.GetComponent<Item>().Interaction();
+                ray.transform.gameObject.GetComponent<Item>().Interaction(gameObject);
         }
         else
             Debug.Log("");  
