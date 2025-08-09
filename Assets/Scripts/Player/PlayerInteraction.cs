@@ -34,7 +34,7 @@ public class PlayerInteraction : MonoBehaviour
         }
         else
         {
-            Debug.Log("");
+            //disable the promt and maybe clean up the values, idk yet
             canInteract = false;
         }
     }

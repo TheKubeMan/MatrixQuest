@@ -8,13 +8,20 @@ public class PlayerInventory : MonoBehaviour
     public List<int> inventory;
     public List<Color> keys;
 
+    void Start()
+    {
+        int[][] temp = GameManager.currentTask.answer;
+        for (int i = 0; i < temp.Length; i++)
+            for (int j = 0; j < temp[i].Length; j++)
+                resMatrix.Add(temp[i][j]);
+    }
+
     public void CheckCorrectness()
     {
         for (int i = 0; i < inventory.Count; i++)
             if (inventory[i] != resMatrix[i])
             {
-                //this way of referencing might be changed cuz it's long and might not be efficient
-                if (GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().singlePlayer)
+                if (GameManager.GM.singlePlayer)
                 {
                     //add a penalty, like substract from the score or something, idk
                 }
