@@ -46,13 +46,12 @@ public class GameManager : MonoBehaviour
             GM = this;
         }
         else if (GM != this)
-            Destroy(this);
+            if (SceneManager.GetActiveScene().name != "MainMenu")
+                Destroy(this);
 
         //needed to read the problems from a json file
-        string filePath = Application.dataPath + "/tasks.json";
+        string filePath = Application.streamingAssetsPath + "/tasks.json";
         string jsonString = File.ReadAllText(filePath);
-        //allData refuses to be filled with the JSON data, even tho the string is ok
-        //i honestly don't know how to fix it and what to do
         allData = JsonConvert.DeserializeObject<Root>(jsonString);
         Debug.Log(allData._2x2.task0.a[0][0]);
         taskMap = new Dictionary<string, Task>
