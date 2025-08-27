@@ -48,30 +48,37 @@ public class GameManager : MonoBehaviour
         else if (GM != this)
             if (SceneManager.GetActiveScene().name != "MainMenu")
                 Destroy(this);
-
+                
         //needed to read the problems from a json file
-        string filePath = Application.streamingAssetsPath + "/tasks.json";
-        string jsonString = File.ReadAllText(filePath);
-        allData = JsonConvert.DeserializeObject<Root>(jsonString);
-        Debug.Log(allData._2x2.task0.a[0][0]);
-        taskMap = new Dictionary<string, Task>
+        try
         {
-            { "0_0", allData._2x2.task0 },
-            { "0_1", allData._2x2.task1 },
-            { "0_2", allData._2x2.task2 },
-            { "1_0", allData._2x3.task0 },
-            { "1_1", allData._2x3.task1 },
-            { "1_2", allData._2x3.task2 },
-            { "2_0", allData._3x3.task0 },
-            { "2_1", allData._3x3.task1 },
-            { "2_2", allData._3x3.task2 },
-            { "3_0", allData._3x4.task0 },
-            { "3_1", allData._3x4.task1 },
-            { "3_2", allData._3x4.task2 },
-            { "4_0", allData._4x4.task0 },
-            { "4_1", allData._4x4.task1 },
-            { "4_2", allData._4x4.task2 }
-        };
+            string filePath = Application.streamingAssetsPath + "/tasks.json";
+            string jsonString = File.ReadAllText(filePath);
+            allData = JsonConvert.DeserializeObject<Root>(jsonString);
+            Debug.Log(allData._2x2.task0.a[0][0]);
+            taskMap = new Dictionary<string, Task>
+            {
+                { "0_0", allData._2x2.task0 },
+                { "0_1", allData._2x2.task1 },
+                { "0_2", allData._2x2.task2 },
+                { "1_0", allData._2x3.task0 },
+                { "1_1", allData._2x3.task1 },
+                { "1_2", allData._2x3.task2 },
+                { "2_0", allData._3x3.task0 },
+                { "2_1", allData._3x3.task1 },
+                { "2_2", allData._3x3.task2 },
+                { "3_0", allData._3x4.task0 },
+                { "3_1", allData._3x4.task1 },
+                { "3_2", allData._3x4.task2 },
+                { "4_0", allData._4x4.task0 },
+                { "4_1", allData._4x4.task1 },
+                { "4_2", allData._4x4.task2 }
+            };
+        }
+        catch
+        {
+            Debug.Log("There should be a messagebox saying that you have a problem with the json here, but i'm lazy");
+        }
     }
 
     public void SingleGame(int level)
@@ -86,7 +93,7 @@ public class GameManager : MonoBehaviour
 
         string levelName = "Single" + level + "_" + variant;
         //yet again, just for testing, the SampleScene will be loaded instead of levelName
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(levelName);
     }
 
     public void Exit()
