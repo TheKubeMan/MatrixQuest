@@ -22,34 +22,34 @@ public class Number : MonoBehaviour
             switch (i)
             {
                 case '0':
-                    Instantiate(num0, transform);
+                    Instantiate(num0, Vector3.zero, Quaternion.Euler(0, 0, 0), transform);
                     break;
                 case '1':
-                    Instantiate(num1, transform);
+                    Instantiate(num1, Vector3.zero, Quaternion.Euler(0, 0, 0), transform);
                     break;
                 case '2':
-                    Instantiate(num2, transform);
+                    Instantiate(num2, Vector3.zero, Quaternion.Euler(0, 0, 0), transform);
                     break;
                 case '3':
-                    Instantiate(num3, transform);
+                    Instantiate(num3, Vector3.zero, Quaternion.Euler(0, 0, 0), transform);
                     break;
                 case '4':
-                    Instantiate(num4, transform);
+                    Instantiate(num4, Vector3.zero, Quaternion.Euler(0, 0, 0), transform);
                     break;
                 case '5':
-                    Instantiate(num5, transform);
+                    Instantiate(num5, Vector3.zero, Quaternion.Euler(0, 0, 0), transform);
                     break;
                 case '6':
-                    Instantiate(num6, transform);
+                    Instantiate(num6, Vector3.zero, Quaternion.Euler(0, 0, 0), transform);
                     break;
                 case '7':
-                    Instantiate(num7, transform);
+                    Instantiate(num7, Vector3.zero, Quaternion.Euler(0, 0, 0), transform);
                     break;
                 case '8':
-                    Instantiate(num8, transform);
+                    Instantiate(num8, Vector3.zero, Quaternion.Euler(0, 0, 0), transform);
                     break;
                 case '9':
-                    Instantiate(num9, transform);
+                    Instantiate(num9, Vector3.zero, Quaternion.Euler(0, 0, 0), transform);
                     break;
             }
             count++;

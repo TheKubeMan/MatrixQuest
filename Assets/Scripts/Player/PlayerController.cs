@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
 	float moveX;
 	float moveZ;
@@ -58,7 +59,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		grounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, ground);
+        if (!IsOwner) return;
+
+        grounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, ground);
 
 		//save momentum after sliding down a slope
 		if (sliding && rb.velocity.magnitude > 13)
