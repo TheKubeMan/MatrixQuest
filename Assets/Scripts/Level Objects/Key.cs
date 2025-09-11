@@ -7,33 +7,39 @@ public class Key : MonoBehaviour
     public enum Colorr
     {
         red, green, blue,
-        yellow, white, black
+        yellow, orange, white,
+        purple, cyan
     }
     public Colorr color;
-    public Color value;
+    public Color32 value;
 
     void Start()
     {
-        //temp colors, will be changed to have 16 (or at least 8) presets that look good
         switch (color)
         {
             case Colorr.red:
-                value = Color.red;
+                value = new Color32 (178, 31, 31, 255);
                 break;
             case Colorr.green:
-                value = Color.green;
+                value = new Color32 (15, 153, 24, 255);
                 break;
             case Colorr.blue:
-                value = Color.blue;
+                value = new Color32 (52, 83, 221, 255);
                 break;
             case Colorr.yellow:
-                value = Color.yellow;
+                value = new Color32 (222, 200, 13, 255);
                 break;
             case Colorr.white:
-                value = Color.white;
+                value = new Color32 (255, 255, 255, 255);
                 break;
-            case Colorr.black:
-                value = Color.black;
+            case Colorr.orange:
+                value = new Color32 (196, 108, 13, 255);
+                break;
+            case Colorr.purple:
+                value = new Color32 (161, 10, 198, 255);
+                break;
+            case Colorr.cyan:
+                value = new Color32 (26, 186, 207, 255);
                 break;
         }
         //when there will be a model for the key this 

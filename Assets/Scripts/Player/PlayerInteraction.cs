@@ -26,7 +26,6 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out ray, interactionDistance, interactable))
         {
-            Debug.Log("Object with type " + ray.transform.gameObject.GetComponent<Item>().type + " in sight");
             //display a prompt for interaction based on the type
             //for example, if it's a number, then it's a pickup icon and text
             //or, if it's a button, then it's "press the button" and so on
