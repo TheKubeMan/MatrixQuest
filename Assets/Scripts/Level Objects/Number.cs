@@ -13,7 +13,7 @@ public class Number : MonoBehaviour
     public float numWidth;
     public float gap;
     // Start is called before the first frame update
-    void Start()
+    public void Draw()
     {
         string numstr = value.ToString();
         int count = 0;

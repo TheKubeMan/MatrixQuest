@@ -89,6 +89,15 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowMatrix"",
+                    ""type"": ""Button"",
+                    ""id"": ""95dc7128-0d22-4b15-b112-297d9417cf16"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -421,6 +430,17 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a110df4-2954-48a7-b4e2-15dc4261f023"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ShowMatrix"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -503,6 +523,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         m_Player_Slide = m_Player.FindAction("Slide", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_ShowMatrix = m_Player.FindAction("ShowMatrix", throwIfNotFound: true);
         // Pause
         m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
         m_Pause_Unpause = m_Pause.FindAction("Unpause", throwIfNotFound: true);
@@ -572,6 +593,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Slide;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_ShowMatrix;
     public struct PlayerActions
     {
         private @InputManager m_Wrapper;
@@ -583,6 +605,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         public InputAction @Slide => m_Wrapper.m_Player_Slide;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @ShowMatrix => m_Wrapper.m_Player_ShowMatrix;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -613,6 +636,9 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @ShowMatrix.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowMatrix;
+                @ShowMatrix.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowMatrix;
+                @ShowMatrix.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowMatrix;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -638,6 +664,9 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @ShowMatrix.started += instance.OnShowMatrix;
+                @ShowMatrix.performed += instance.OnShowMatrix;
+                @ShowMatrix.canceled += instance.OnShowMatrix;
             }
         }
     }
@@ -702,6 +731,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         void OnSlide(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnShowMatrix(InputAction.CallbackContext context);
     }
     public interface IPauseActions
     {

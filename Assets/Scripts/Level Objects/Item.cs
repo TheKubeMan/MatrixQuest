@@ -21,10 +21,7 @@ public class Item : MonoBehaviour
             case ObjectType.number:
                 Debug.Log("Hey, a number!");
                 player.GetComponent<PlayerInventory>().inventory.Add(gameObject.GetComponent<Number>().value);
-                //temporary commented since there's no data to work with yet
-                // player.GetComponent<PlayerInventory>().CheckCorrectness(gameObject);
-                //add a check for being a correct number that was picked at the wrong time to stop it from disappearing
-                Destroy(gameObject);
+                player.GetComponent<PlayerInventory>().CheckCorrectness(gameObject);
                 break;
             case ObjectType.button:
                 //activate the linked mechanism using a unity event, check KeyReader.cs to see how it's done
