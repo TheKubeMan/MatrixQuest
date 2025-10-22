@@ -123,4 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 2
-  value: {r: 0, g: 0, b: 0, a: 0}
+  value:
+    serializedVersion: 2
+    rgba: 0
+  colored: {fileID: 0}

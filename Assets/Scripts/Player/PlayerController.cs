@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 		input.Player.Jump.performed += context => Jump();
 
 		input.Player.Pause.performed += context => Pause();
-		input.Pause.Unpause.performed += ContextMenu => Unpause();
+		input.Pause.Unpause.performed += context => Unpause();
 
 		input.Player.Movement.performed += ctx => moveX = ctx.ReadValue<Vector2>().x;
 		input.Player.Movement.performed += ctx => moveZ = ctx.ReadValue<Vector2>().y;
@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
 
 		rb = gameObject.GetComponent<Rigidbody>();
 		rb.freezeRotation = true;
+
+		Pause();
     }
 
     // Update is called once per frame

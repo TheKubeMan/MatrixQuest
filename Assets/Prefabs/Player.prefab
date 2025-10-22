@@ -217,6 +217,22 @@ MonoBehaviour:
   resMatrix: 
   inventory: 
   keys: []
+  keysUI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Green: {fileID: 21300000, guid: 548a085fa57315d4783341e25a07021c, type: 3}
+  Red: {fileID: 21300000, guid: 055cfb131ad43fe4ebba2f6839915997, type: 3}
+  Blue: {fileID: 21300000, guid: b62b59b8f73a4bf4fb79667fcfca9dd1, type: 3}
+  Yellow: {fileID: 21300000, guid: 3147d29dc4a57954f9fd8aa4ad86197a, type: 3}
+  Orange: {fileID: 21300000, guid: 24045b2389aeaf641973884c4f3f43f5, type: 3}
+  Purple: {fileID: 21300000, guid: c6673aeecad78b34492f0c58ce7bd744, type: 3}
+  White: {fileID: 21300000, guid: 6e7bd459b3cae294faac08e24b6b17ba, type: 3}
+  Cyan: {fileID: 21300000, guid: e167acfb8c209e04b965a8ebf680158b, type: 3}
+  Transp: {fileID: 21300000, guid: 1bb457ad98b6a764a9998f2b9b94cc2e, type: 3}
+  score: 0
 --- !u!1 &7968135951469141822
 GameObject:
   m_ObjectHideFlags: 0

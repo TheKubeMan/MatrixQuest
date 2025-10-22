@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PlayerInventory : MonoBehaviour
     int correctCount = 0;
     bool inMatrix = false;
     public int score = 0;
+    public GameObject VictoryScreen, LevelStuff;
+    public GameObject taskScore, taskScoreFin, timeScore, totalScore;
 
     void Start()
     {
@@ -91,9 +94,23 @@ public class PlayerInventory : MonoBehaviour
         //but to get the best mark you'd need to also have a good time
         score += 300 + (correctCount * 100);
         Destroy(number);
+        taskScore.GetComponent<TextMeshProUGUI>().text = score.ToString();
         //change to updating score ui instead
-        Debug.Log(score);
         Debug.Log(correctCount);
+
+        if (inventory.Count == resMatrix.Count)
+        {
+            LevelStuff.SetActive(false);
+            gameObject.GetComponent<PlayerController>().enabled = false;
+            Camera.main.GetComponent<Timer>().Finish();
+            int time = Camera.main.GetComponent<Timer>().finalTime;
+            VictoryScreen.SetActive(true);
+            taskScoreFin.GetComponent<TextMeshProUGUI>().text = score.ToString();
+            //calculate the time-based score. as this is gonna be complex and level-dependant, imma skip it for now
+            int timeS = 0;
+            timeScore.GetComponent<TextMeshProUGUI>().text = timeS.ToString();
+            totalScore.GetComponent<TextMeshProUGUI>().text = (score + timeS).ToString();
+        }
 
         //update the task ui to have the number shown
         //also, if the session is in multiplayer, then add a background to the number 

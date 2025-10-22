@@ -84,15 +84,12 @@ public class GameManager : MonoBehaviour
     public void SingleGame(int level)
     {
         singlePlayer = true;
-        //int variant = Random.Range(0, 3);
-        //for testing, variant will always be 0
-        int variant = 0;
+        int variant = Random.Range(0, 2);
         //get data from the jsonString based on the variant value
         string key = $"{level}_{variant}";
         taskMap.TryGetValue(key, out currentTask);
 
         string levelName = "Single" + level + "_" + variant;
-        //yet again, just for testing, the SampleScene will be loaded instead of levelName
         SceneManager.LoadScene(levelName);
     }
 
