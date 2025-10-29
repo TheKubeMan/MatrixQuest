@@ -1,4 +1,4 @@
-using System.Collections;
+	using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,7 +16,7 @@ public class Looking : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		sensetivity = PlayerPrefs.GetInt("Sensetivity", 100) * 3;
+		//sensetivity = PlayerPrefs.GetInt("Sensetivity", 100) * 3;
 		input = new InputManager();
 		input.Player.Enable();
 		input.Player.Camera.performed += ctx => x = ctx.ReadValue<Vector2>().x;
