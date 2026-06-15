@@ -14,9 +14,9 @@ public class PlayerInventory : MonoBehaviour
     Dictionary<Color32, Sprite> keyValues;
     int correctCount = 0;
     bool inMatrix = false;
-    public int score = 0;
+    public int score = 0, total = 0;
     public GameObject VictoryScreen, LevelStuff;
-    public GameObject taskScore, taskScoreFin, timeScore, totalScore;
+    public GameObject taskScore, taskScoreFin, timeScore, totalScore, gradeUI;
 
     void Start()
     {
@@ -90,8 +90,6 @@ public class PlayerInventory : MonoBehaviour
             }
 
         correctCount++;
-        //make sure that getting every number correct will  guarantee a good mark
-        //but to get the best mark you'd need to also have a good time
         score += 300 + (correctCount * 100);
         Destroy(number);
         taskScore.GetComponent<TextMeshProUGUI>().text = score.ToString();
@@ -100,21 +98,106 @@ public class PlayerInventory : MonoBehaviour
 
         if (inventory.Count == resMatrix.Count)
         {
-            LevelStuff.SetActive(false);
-            gameObject.GetComponent<PlayerController>().enabled = false;
-            Camera.main.GetComponent<Timer>().Finish();
-            int time = Camera.main.GetComponent<Timer>().finalTime;
-            VictoryScreen.SetActive(true);
-            taskScoreFin.GetComponent<TextMeshProUGUI>().text = score.ToString();
-            //calculate the time-based score. as this is gonna be complex and level-dependant, imma skip it for now
-            int timeS = 0;
-            timeScore.GetComponent<TextMeshProUGUI>().text = timeS.ToString();
-            totalScore.GetComponent<TextMeshProUGUI>().text = (score + timeS).ToString();
+            EndGame();
         }
 
         //update the task ui to have the number shown
         //also, if the session is in multiplayer, then add a background to the number 
         //to match the player's color to indicate who picked the number up
 
+    }
+    void EndGame()
+    {
+        LevelStuff.SetActive(false);
+        gameObject.GetComponent<PlayerController>().enabled = false;
+        VictoryScreen.SetActive(true);
+
+        Camera.main.GetComponent<Timer>().Finish();
+        int time = Camera.main.GetComponent<Timer>().finalTime;
+        int timeS, grade;
+        int size = GameManager.currentSize;
+
+        int t1 = 0, t2 = 0, t3 = 0;
+        int s1 = 0, s2 = 0, s3 = 0;
+        switch (size)
+        {
+            case 0:
+                t1 = 50 * 100;
+                t2 = 90 * 100;
+                t3 = 130 * 100;
+                s1 = 2800;
+                s2 = 2500;
+                s3 = 1900;
+                break;
+            case 1:
+                t1 = 90 * 100;
+                t2 = 135 * 100;
+                t3 = 180 * 100;
+                break;
+            case 2:
+                t1 = 135 * 100;
+                t2 = 180 * 100;
+                t3 = 250 * 100;
+                break;
+            case 3:
+                t1 = 160 * 100;
+                t2 = 210 * 100;
+                t3 = 255 * 100;
+                break;
+            case 4:
+                t1 = 200 * 100;
+                t2 = 280 * 100;
+                t3 = 330 * 100;
+                break;
+        }
+
+        if (time <= t1)
+            timeS = 900;
+        else if (time > t1 && time <= t2)
+            timeS = 600;
+        else if (time > t2 && time < t3)
+            timeS = 300;
+        else
+            timeS = 0;
+
+        total = score + timeS;
+
+        if (total >= s1)
+            grade = 5;
+        else if (total < s1 && total >= s2)
+            grade = 4;
+        else if (total < s2 && total >= s3)
+            grade = 3;
+        else
+            grade = 2;
+
+        int[] fin = new int[2];
+        fin[0] = total;
+        fin[1] = time;
+        switch (size)
+        {
+            case 0:
+                GameManager.Record2x2.Add(fin);
+                break;
+            case 1:
+                GameManager.Record2x3.Add(fin);
+                break;
+            case 2:
+                GameManager.Record3x3.Add(fin);
+                break;
+            case 3:
+                GameManager.Record3x4.Add(fin);
+                break;
+            case 4:
+                GameManager.Record4x4.Add(fin);
+                break;
+        }
+
+        SaveSystem.SaveResults(size);
+
+        taskScoreFin.GetComponent<TextMeshProUGUI>().text = score.ToString();
+        timeScore.GetComponent<TextMeshProUGUI>().text = timeS.ToString();
+        totalScore.GetComponent<TextMeshProUGUI>().text = total.ToString();
+        gradeUI.GetComponent<TextMeshProUGUI>().text = grade.ToString();
     }
 }

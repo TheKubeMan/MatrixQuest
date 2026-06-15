@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class PlayerInteraction : MonoBehaviour
     public LayerMask interactable;
     public float interactionDistance;
     RaycastHit ray;
-    //public GameObject pauseMenu;
+    //child[0] - icon
+    //child[1] - text
+    public GameObject prompt;
+    public Sprite PickUp, Press, InsertKey;
     bool canInteract, paused = false;
     public InputManager input;
-    // Start is called before the first frame update
+    
     void Start()
     {
         input = new InputManager();
@@ -26,14 +30,32 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out ray, interactionDistance, interactable))
         {
-            //display a prompt for interaction based on the type
-            //for example, if it's a number, then it's a pickup icon and text
-            //or, if it's a button, then it's "press the button" and so on
+            prompt.SetActive(true);
+            switch (ray.transform.GetComponent<Item>().pType)
+            {
+                case "number":
+                    prompt.transform.GetChild(1).GetComponent<Text>().text = "Подобрать";
+                    prompt.transform.GetChild(0).GetComponent<Image>().sprite = PickUp;
+                    break;
+                case "button":
+                    prompt.transform.GetChild(1).GetComponent<Text>().text = "Нажать";
+                    prompt.transform.GetChild(0).GetComponent<Image>().sprite = Press;
+                    break;
+                case "key":
+                    prompt.transform.GetChild(1).GetComponent<Text>().text = "Подобрать";
+                    prompt.transform.GetChild(0).GetComponent<Image>().sprite = PickUp;
+                    break;
+                case "keyReader":
+                    prompt.transform.GetChild(1).GetComponent<Text>().text = "Использовать";
+                    prompt.transform.GetChild(0).GetComponent<Image>().sprite = InsertKey;
+                    break;
+            }
+            //change the text of the prompt according to the object's type
             canInteract = true;
         }
         else
         {
-            //disable the promt and maybe clean up the values, idk yet
+            prompt.SetActive(false);
             canInteract = false;
         }
     }

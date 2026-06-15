@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Item : MonoBehaviour
 {
@@ -13,6 +14,27 @@ public class Item : MonoBehaviour
         keyReader
     }
     public ObjectType type;
+    public string pType;
+    public UnityEvent action;
+
+    void Start()
+    {
+        switch (type)
+        {
+            case ObjectType.number:
+                pType = "number";
+                break;
+            case ObjectType.button:
+                pType = "button";
+                break;
+            case ObjectType.key:
+                pType = "key";
+                break;
+            case ObjectType.keyReader:
+                pType = "keyReader";
+                break;
+        }
+    }
     
     public void Interaction(GameObject player)
     {
@@ -24,7 +46,7 @@ public class Item : MonoBehaviour
                 player.GetComponent<PlayerInventory>().CheckCorrectness(gameObject);
                 break;
             case ObjectType.button:
-                //activate the linked mechanism using a unity event, check KeyReader.cs to see how it's done
+                action.Invoke();
                 Debug.Log("You pressed a button... but nothing happened");
                 break;
             case ObjectType.key:
