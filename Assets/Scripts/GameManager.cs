@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
@@ -51,7 +52,7 @@ public static class SaveSystem
         }
         else
         {
-            Debug.LogError("Save file not found in " + path);
+            Debug.LogWarning("Save file not found in " + path);
             return null;
         }
     }
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour
     public static Task currentTask;
     public static int currentSize;
     public static List<int[]> Record2x2, Record2x3, Record3x3, Record3x4, Record4x4;
-    public GameObject table, rowPrefab;
+    public GameObject table, rowPrefab, noData;
     public Root allData;
     Dictionary<string, Task> taskMap;
 
@@ -75,6 +76,7 @@ public class GameManager : MonoBehaviour
         public int[][] a;
         public int[][] b;
         public int[][] answer;
+        public int[] junk;
     }
     [System.Serializable]
     public class Size
@@ -104,17 +106,23 @@ public class GameManager : MonoBehaviour
             if (SceneManager.GetActiveScene().name != "MainMenu")
                 Destroy(this);
 
-        SaveSystem.LoadResults(0);
-        SaveSystem.LoadResults(1);
-        SaveSystem.LoadResults(2);
-        SaveSystem.LoadResults(3);
-        SaveSystem.LoadResults(4);
+        Record2x2 = SaveSystem.LoadResults(0);
+        Record2x3 = SaveSystem.LoadResults(1);
+        Record3x3 = SaveSystem.LoadResults(2);
+        Record3x4 = SaveSystem.LoadResults(3);
+        Record4x4 = SaveSystem.LoadResults(4);
 
         //needed to read the problems from a json file
         try
         {
-            string filePath = Application.streamingAssetsPath + "/tasks.json";
-            string jsonString = File.ReadAllText(filePath);
+            // change the file path to a more secure one
+            string filePath = Application.streamingAssetsPath + "/tasks.dll";
+            byte[] cyphered = File.ReadAllBytes(filePath);
+            
+            for (int i = 0; i < cyphered.Length; i++)
+                cyphered[i] = (byte)~cyphered[i];
+
+            string jsonString = Encoding.UTF8.GetString(cyphered);
             allData = JsonConvert.DeserializeObject<Root>(jsonString);
             Debug.Log(allData._2x2.task0.a[0][0]);
             taskMap = new Dictionary<string, Task>
@@ -178,6 +186,12 @@ public class GameManager : MonoBehaviour
             case 4:
                 data = GameManager.Record4x4;
                 break;
+        }
+
+        if (data == null)
+        {
+            Instantiate(noData, table.transform);
+            return; 
         }
 
         data.Sort((a, b) => a[1].CompareTo(b[1]));

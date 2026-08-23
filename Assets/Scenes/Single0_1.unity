@@ -427,6 +427,22 @@ PrefabInstance:
       propertyPath: keysUI.Array.data[4]
       value: 
       objectReference: {fileID: 1104414568}
+    - target: {fileID: 7968135951216607261, guid: 99e2e525b515e19449076712f8f3cfe2, type: 3}
+      propertyPath: Press
+      value: 
+      objectReference: {fileID: 21300000, guid: 9645f19862eedcd4eaeb3aa7aa220f60, type: 3}
+    - target: {fileID: 7968135951216607261, guid: 99e2e525b515e19449076712f8f3cfe2, type: 3}
+      propertyPath: PickUp
+      value: 
+      objectReference: {fileID: 21300000, guid: 654ff51e608f5814a93a2ac4b4ad528c, type: 3}
+    - target: {fileID: 7968135951216607261, guid: 99e2e525b515e19449076712f8f3cfe2, type: 3}
+      propertyPath: prompt
+      value: 
+      objectReference: {fileID: 1104414579}
+    - target: {fileID: 7968135951216607261, guid: 99e2e525b515e19449076712f8f3cfe2, type: 3}
+      propertyPath: InsertKey
+      value: 
+      objectReference: {fileID: 21300000, guid: 654ff51e608f5814a93a2ac4b4ad528c, type: 3}
     - target: {fileID: 7968135951216607263, guid: 99e2e525b515e19449076712f8f3cfe2, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -6695,6 +6711,11 @@ GameObject:
 --- !u!1 &1104414578 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1211756179622364179, guid: 3cb80b59a32015b4cb94269c1be93f1c, type: 3}
+  m_PrefabInstance: {fileID: 1104414565}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1104414579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1240889621396520677, guid: 3cb80b59a32015b4cb94269c1be93f1c, type: 3}
   m_PrefabInstance: {fileID: 1104414565}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1175242485

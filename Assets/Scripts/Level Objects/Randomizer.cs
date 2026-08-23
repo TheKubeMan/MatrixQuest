@@ -12,7 +12,8 @@ public class Randomizer : MonoBehaviour
         for (int i = 0; i < temp.Length; i++)
             for (int j = 0; j < temp[i].Length; j++)
                 resMatrix.Add(temp[i][j]);
-        //add junk fetched from the json
+        foreach (var num in GameManager.currentTask.junk)
+            resMatrix.Add(num);
 
         //shuffle the matrix
         int n = resMatrix.Count;
